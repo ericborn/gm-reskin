@@ -100,11 +100,11 @@ I hope this framework can help you write less code when you make skin.
 
     GMReskin.getSkinIndex(Class<? extends AbstractCreature> cls)
 
-获得指定种类生物当前使用的皮肤下标(下标不能小于0，否则会视为0)
+Gets the skin index currently used by the specified creature.
 
     GMReskin.setSkinIndex(Class<? extends AbstractCreature> cls, int index)
 
-Set the skin index currently used by the specified creature as `index`.
+Set the skin index currently used by the specified creature as `index`(The index cannot be less than 0, otherwise it will be regarded as 0).
 
 It will not affect existing creatures, and later generated creatures will use this skin.
 

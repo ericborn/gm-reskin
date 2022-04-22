@@ -102,11 +102,11 @@
 
     GMReskin.getSkinIndex(Class<? extends AbstractCreature> cls)
 
-获得指定种类生物当前使用的皮肤下标(下标不能小于0，否则会视为0)
+获得指定种类生物当前使用的皮肤下标
 
     GMReskin.setSkinIndex(Class<? extends AbstractCreature> cls, int index)
 
-将指定种类生物当前使用的皮肤下标设为`index`
+将指定种类生物当前使用的皮肤下标设为`index`(下标不能小于0，否则会视为0)
 。不会影响已有的生物，之后生成的该种生物会使用此皮肤
 
     GMReskin.refreshSkin(AbstractCreature creature)
