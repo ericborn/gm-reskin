@@ -6,7 +6,7 @@ import gmreskin.skins.SkinRenderer;
 public class LouseNormalSkinRenderer extends SkinRenderer {
     public LouseNormalSkinRenderer(String skinPath) {
         super(skinPath);
-        if (this.isSkinLoaded()) this.animation.scale = 1.0F;
+        if (this.isSkinLoaded()) this.animation.scale = 0.8F;
     }
 
     @Override
