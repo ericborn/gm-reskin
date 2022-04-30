@@ -5,6 +5,7 @@ import com.evacipated.cardcrawl.modthespire.lib.SpireRawPatch;
 import com.megacrit.cardcrawl.monsters.city.Byrd;
 import com.megacrit.cardcrawl.monsters.city.Chosen;
 import com.megacrit.cardcrawl.monsters.city.SphericGuardian;
+import com.megacrit.cardcrawl.monsters.exordium.FungiBeast;
 import com.megacrit.cardcrawl.monsters.exordium.LouseDefensive;
 import com.megacrit.cardcrawl.monsters.exordium.LouseNormal;
 import gmreskin.GMReskin;
@@ -85,6 +86,20 @@ public class MonsterAddAnnotationPatch {
             CtClass ctClass = ctMethodToPatch.getDeclaringClass();
             ConstPool constPool = ctMethodToPatch.getMethodInfo().getConstPool();
             Annotation skin1 = setCustomSkinRenderer(ByrdSkinRenderer.class, GMReskin.getResourcePath("skins/monsters/" + ctClass.getSimpleName() + ".xml"), 0, constPool);
+            addAnnotations(ctMethodToPatch, skin1);
+        }
+    }
+
+    @SpirePatch(
+            clz = FungiBeast.class,
+            method = "takeTurn"
+    )
+    public static class PatchFungiBeast {
+        @SpireRawPatch
+        public static void Raw(CtBehavior ctMethodToPatch) {
+            CtClass ctClass = ctMethodToPatch.getDeclaringClass();
+            ConstPool constPool = ctMethodToPatch.getMethodInfo().getConstPool();
+            Annotation skin1 = setCustomSkinRenderer(FungiBeastSkinRenderer.class, GMReskin.getResourcePath("skins/monsters/" + ctClass.getSimpleName() + ".xml"), 0, constPool);
             addAnnotations(ctMethodToPatch, skin1);
         }
     }
