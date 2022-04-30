@@ -3,6 +3,7 @@ package gmreskin.patches;
 import basemod.ReflectionHacks;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
 import com.evacipated.cardcrawl.modthespire.lib.SpireReturn;
 import com.megacrit.cardcrawl.actions.utility.UseCardAction;
@@ -75,6 +76,8 @@ public class AbstractPlayerPatch {
             if (skinRenderer == null || !skinRenderer.isSkinLoaded()) {
                 return SpireReturn.Continue();
             }
+            ShaderProgram shaderProgram = sb.getShader();
+            sb.setShader(null);
             p.stance.render(sb);
             if ((AbstractDungeon.getCurrRoom().phase == AbstractRoom.RoomPhase.COMBAT || AbstractDungeon.getCurrRoom() instanceof MonsterRoom) && !p.isDead) {
                 p.renderHealth(sb);
@@ -86,13 +89,14 @@ public class AbstractPlayerPatch {
             }
 
             if (!(AbstractDungeon.getCurrRoom() instanceof RestRoom)) {
+                sb.setShader(shaderProgram);
                 if (!(boolean) ReflectionHacks.getPrivate(p, AbstractPlayer.class, "renderCorpse")) {
                     skinRenderer.render(sb);
                 } else {
                     sb.setColor(Color.WHITE);
                     sb.draw(p.img, p.drawX - (float)p.img.getWidth() * Settings.scale / 2.0F + p.animX, p.drawY, (float)p.img.getWidth() * Settings.scale, (float)p.img.getHeight() * Settings.scale, 0, 0, p.img.getWidth(), p.img.getHeight(), p.flipHorizontal, p.flipVertical);
                 }
-
+                sb.setShader(null);
                 p.hb.render(sb);
                 p.healthHb.render(sb);
             } else {

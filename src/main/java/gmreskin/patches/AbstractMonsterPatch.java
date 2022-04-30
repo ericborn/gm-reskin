@@ -82,7 +82,7 @@ public class AbstractMonsterPatch {
             }
             if (!m.isDead && !m.escaped) {
                 skinRenderer.render(sb);
-
+                sb.setShader(null);
                 if (!m.isDeadOrEscaped() && AbstractDungeon.getCurrRoom().phase == AbstractRoom.RoomPhase.COMBAT && !AbstractDungeon.player.isDead && !AbstractDungeon.player.hasRelic("Runic Dome") && m.intent != AbstractMonster.Intent.NONE && !Settings.hideCombatElements) {
                     try {
                         ReflectionHacks.getCachedMethod(AbstractMonster.class, "renderIntentVfxBehind", SpriteBatch.class).invoke(m, sb);
