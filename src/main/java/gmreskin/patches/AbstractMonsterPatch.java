@@ -81,6 +81,7 @@ public class AbstractMonsterPatch {
                 return SpireReturn.Continue();
             }
             if (!m.isDead && !m.escaped) {
+                if (AbstractDungeon.getCurrRoom().phase != AbstractRoom.RoomPhase.COMBAT) skinRenderer.update();
                 skinRenderer.render(sb);
                 sb.setShader(null);
                 if (!m.isDeadOrEscaped() && AbstractDungeon.getCurrRoom().phase == AbstractRoom.RoomPhase.COMBAT && !AbstractDungeon.player.isDead && !AbstractDungeon.player.hasRelic("Runic Dome") && m.intent != AbstractMonster.Intent.NONE && !Settings.hideCombatElements) {
