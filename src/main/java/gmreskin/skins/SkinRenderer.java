@@ -59,6 +59,10 @@ public abstract class SkinRenderer implements Disposable {
 
     }
 
+    public AnimatedActor getAnimation() {
+        return this.animation;
+    }
+
     @Override
     public void dispose() {
         if (this.animation != null) {
