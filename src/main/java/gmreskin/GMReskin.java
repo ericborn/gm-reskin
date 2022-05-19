@@ -9,6 +9,7 @@ import basemod.interfaces.PostInitializeSubscriber;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.utils.Disposable;
+import com.evacipated.cardcrawl.modthespire.Loader;
 import com.evacipated.cardcrawl.modthespire.lib.SpireConfig;
 import com.evacipated.cardcrawl.modthespire.lib.SpireInitializer;
 import com.megacrit.cardcrawl.characters.Defect;
@@ -22,6 +23,8 @@ import com.megacrit.cardcrawl.helpers.FontHelper;
 import com.megacrit.cardcrawl.helpers.ImageMaster;
 import com.megacrit.cardcrawl.localization.UIStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
+import com.megacrit.cardcrawl.monsters.beyond.*;
+import com.megacrit.cardcrawl.monsters.city.*;
 import com.megacrit.cardcrawl.monsters.exordium.*;
 import gmreskin.patches.AbstractMonsterPatch;
 import gmreskin.skins.SkinRenderer;
@@ -144,41 +147,113 @@ public class GMReskin implements PostInitializeSubscriber,
                         disableSkin(TheSilent.class);
                         disableSkin(Defect.class);
                         disableSkin(Watcher.class);
-                        disableSkin(LouseNormal.class);
-                        disableSkin(LouseDefensive.class);
+                        if (Loader.isModLoaded("Scapegoat")) {
+                            try {
+                                disableSkin((Class<? extends AbstractCreature>) Class.forName("demoMod.scapegoat.characters.ScapegoatCharacter"));
+                            } catch (ClassNotFoundException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                        if (Loader.isModLoaded("funnies")) {
+                            try {
+                                disableSkin((Class<? extends AbstractCreature>) Class.forName("characters.GodOfAbstract"));
+                            } catch (ClassNotFoundException e) {
+                                e.printStackTrace();
+                            }
+                        }
                         disableSkin(AcidSlime_L.class);
                         disableSkin(AcidSlime_M.class);
                         disableSkin(AcidSlime_S.class);
+                        disableSkin(Byrd.class);
+                        disableSkin(Centurion.class);
+                        disableSkin(Chosen.class);
                         disableSkin(Cultist.class);
+                        disableSkin(Darkling.class);
+                        disableSkin(Exploder.class);
+                        disableSkin(FungiBeast.class);
                         disableSkin(GremlinFat.class);
                         disableSkin(GremlinThief.class);
                         disableSkin(GremlinTsundere.class);
                         disableSkin(GremlinWarrior.class);
                         disableSkin(GremlinWizard.class);
+                        disableSkin(Healer.class);
                         disableSkin(JawWorm.class);
+                        disableSkin(Looter.class);
+                        disableSkin(LouseDefensive.class);
+                        disableSkin(LouseNormal.class);
+                        disableSkin(Maw.class);
+                        disableSkin(Mugger.class);
+                        disableSkin(OrbWalker.class);
+                        disableSkin(Repulsor.class);
+                        disableSkin(ShelledParasite.class);
+                        disableSkin(SlaverBlue.class);
+                        disableSkin(SlaverRed.class);
+                        disableSkin(SnakePlant.class);
+                        disableSkin(Snecko.class);
+                        disableSkin(SphericGuardian.class);
+                        disableSkin(Spiker.class);
                         disableSkin(SpikeSlime_L.class);
                         disableSkin(SpikeSlime_M.class);
                         disableSkin(SpikeSlime_S.class);
+                        disableSkin(SpireGrowth.class);
+                        disableSkin(Transient.class);
+                        disableSkin(WrithingMass.class);
                     } else {
                         setSkinIndex(Ironclad.class, 0);
                         setSkinIndex(TheSilent.class, 0);
                         setSkinIndex(Defect.class, 0);
                         setSkinIndex(Watcher.class, 0);
-                        setSkinIndex(LouseNormal.class, 0);
-                        setSkinIndex(LouseDefensive.class, 0);
+                        if (Loader.isModLoaded("Scapegoat")) {
+                            try {
+                                setSkinIndex((Class<? extends AbstractCreature>) Class.forName("demoMod.scapegoat.characters.ScapegoatCharacter"), 0);
+                            } catch (ClassNotFoundException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                        if (Loader.isModLoaded("funnies")) {
+                            try {
+                                setSkinIndex((Class<? extends AbstractCreature>) Class.forName("characters.GodOfAbstract"), 0);
+                            } catch (ClassNotFoundException e) {
+                                e.printStackTrace();
+                            }
+                        }
                         setSkinIndex(AcidSlime_L.class, 0);
                         setSkinIndex(AcidSlime_M.class, 0);
                         setSkinIndex(AcidSlime_S.class, 0);
+                        setSkinIndex(Byrd.class, 0);
+                        setSkinIndex(Centurion.class, 0);
+                        setSkinIndex(Chosen.class, 0);
                         setSkinIndex(Cultist.class, 0);
+                        setSkinIndex(Darkling.class, 0);
+                        setSkinIndex(Exploder.class, 0);
+                        setSkinIndex(FungiBeast.class, 0);
                         setSkinIndex(GremlinFat.class, 0);
                         setSkinIndex(GremlinThief.class, 0);
                         setSkinIndex(GremlinTsundere.class, 0);
                         setSkinIndex(GremlinWarrior.class, 0);
                         setSkinIndex(GremlinWizard.class, 0);
+                        setSkinIndex(Healer.class, 0);
                         setSkinIndex(JawWorm.class, 0);
+                        setSkinIndex(Looter.class, 0);
+                        setSkinIndex(LouseDefensive.class, 0);
+                        setSkinIndex(LouseNormal.class, 0);
+                        setSkinIndex(Maw.class, 0);
+                        setSkinIndex(Mugger.class, 0);
+                        setSkinIndex(OrbWalker.class, 0);
+                        setSkinIndex(Repulsor.class, 0);
+                        setSkinIndex(ShelledParasite.class, 0);
+                        setSkinIndex(SlaverBlue.class, 0);
+                        setSkinIndex(SlaverRed.class, 0);
+                        setSkinIndex(SnakePlant.class, 0);
+                        setSkinIndex(Snecko.class, 0);
+                        setSkinIndex(SphericGuardian.class, 0);
+                        setSkinIndex(Spiker.class, 0);
                         setSkinIndex(SpikeSlime_L.class, 0);
                         setSkinIndex(SpikeSlime_M.class, 0);
                         setSkinIndex(SpikeSlime_S.class, 0);
+                        setSkinIndex(SpireGrowth.class, 0);
+                        setSkinIndex(Transient.class, 0);
+                        setSkinIndex(WrithingMass.class, 0);
                     }
                     skinIndexInfo.setBool("enableDefaultSkin", enableDefaultSkin);
                     saveSkinIndexInfo();
