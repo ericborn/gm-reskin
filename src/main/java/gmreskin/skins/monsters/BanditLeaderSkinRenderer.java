@@ -3,12 +3,11 @@ package gmreskin.skins.monsters;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import gmreskin.skins.SkinRenderer;
 
-public class SnakePlantSkinRenderer extends SkinRenderer {
-    public SnakePlantSkinRenderer(String skinPath) {
+public class BanditLeaderSkinRenderer extends SkinRenderer {
+    public BanditLeaderSkinRenderer(String skinPath) {
         super(skinPath);
         if (this.isSkinLoaded()) {
-            this.animation.scale = 2.0F;
-            this.animation.addTriggerEvent("0", animation -> SnakePlantSkinRenderer.this.animation.setCurAnimation("idle"));
+            this.animation.addTriggerEvent("0", a -> animation.setCurAnimation("idle"));
         }
     }
 
@@ -28,15 +27,11 @@ public class SnakePlantSkinRenderer extends SkinRenderer {
     }
 
     @Override
-    public void onDamaged(int damageAmount) {
-        this.animation.setCurAnimation("hit");
-    }
-
-    @Override
     public void onChangeState(String stateName) {
         switch (stateName) {
-            case "ATTACK":
+            case "STAB":
                 this.animation.setCurAnimation("attack");
+                break;
         }
     }
 }

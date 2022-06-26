@@ -6,12 +6,14 @@ import basemod.ModPanel;
 import basemod.ReflectionHacks;
 import basemod.interfaces.EditStringsSubscriber;
 import basemod.interfaces.PostInitializeSubscriber;
+import basemod.interfaces.PostUpdateSubscriber;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.utils.Disposable;
 import com.evacipated.cardcrawl.modthespire.Loader;
 import com.evacipated.cardcrawl.modthespire.lib.SpireConfig;
 import com.evacipated.cardcrawl.modthespire.lib.SpireInitializer;
+import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.characters.Defect;
 import com.megacrit.cardcrawl.characters.Ironclad;
 import com.megacrit.cardcrawl.characters.TheSilent;
@@ -25,6 +27,9 @@ import com.megacrit.cardcrawl.localization.UIStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.monsters.beyond.*;
 import com.megacrit.cardcrawl.monsters.city.*;
+import com.megacrit.cardcrawl.monsters.ending.CorruptHeart;
+import com.megacrit.cardcrawl.monsters.ending.SpireShield;
+import com.megacrit.cardcrawl.monsters.ending.SpireSpear;
 import com.megacrit.cardcrawl.monsters.exordium.*;
 import gmreskin.patches.AbstractMonsterPatch;
 import gmreskin.skins.SkinRenderer;
@@ -36,9 +41,11 @@ import java.util.List;
 
 @SpireInitializer
 public class GMReskin implements PostInitializeSubscriber,
-                                 EditStringsSubscriber {
+                                 EditStringsSubscriber,
+                                 PostUpdateSubscriber {
     private static final SpireConfig skinIndexInfo;
     private boolean enableDefaultSkin = true;
+    private static final List<AbstractGameAction> actionList = new ArrayList<>();
 
     static {
         SpireConfig skinIndexInfo1;
@@ -198,6 +205,33 @@ public class GMReskin implements PostInitializeSubscriber,
                         disableSkin(SpireGrowth.class);
                         disableSkin(Transient.class);
                         disableSkin(WrithingMass.class);
+                        disableSkin(Hexaghost.class);
+                        disableSkin(TheGuardian.class);
+                        disableSkin(SlimeBoss.class);
+                        disableSkin(Sentry.class);
+                        disableSkin(GremlinNob.class);
+                        disableSkin(Lagavulin.class);
+                        disableSkin(Taskmaster.class);
+                        disableSkin(BookOfStabbing.class);
+                        disableSkin(GremlinLeader.class);
+                        disableSkin(BronzeAutomaton.class);
+                        disableSkin(BronzeOrb.class);
+                        disableSkin(TheCollector.class);
+                        disableSkin(TorchHead.class);
+                        disableSkin(Champ.class);
+                        disableSkin(BanditLeader.class);
+                        disableSkin(BanditPointy.class);
+                        disableSkin(BanditBear.class);
+                        disableSkin(Nemesis.class);
+                        disableSkin(Reptomancer.class);
+                        disableSkin(SnakeDagger.class);
+                        disableSkin(Donu.class);
+                        disableSkin(Deca.class);
+                        disableSkin(TimeEater.class);
+                        disableSkin(AwakenedOne.class);
+                        disableSkin(SpireSpear.class);
+                        disableSkin(SpireShield.class);
+                        disableSkin(CorruptHeart.class);
                     } else {
                         setSkinIndex(Ironclad.class, 0);
                         setSkinIndex(TheSilent.class, 0);
@@ -254,6 +288,33 @@ public class GMReskin implements PostInitializeSubscriber,
                         setSkinIndex(SpireGrowth.class, 0);
                         setSkinIndex(Transient.class, 0);
                         setSkinIndex(WrithingMass.class, 0);
+                        setSkinIndex(Hexaghost.class, 0);
+                        setSkinIndex(TheGuardian.class, 0);
+                        setSkinIndex(SlimeBoss.class, 0);
+                        setSkinIndex(Sentry.class, 0);
+                        setSkinIndex(GremlinNob.class, 0);
+                        setSkinIndex(Lagavulin.class, 0);
+                        setSkinIndex(Taskmaster.class, 0);
+                        setSkinIndex(BookOfStabbing.class, 0);
+                        setSkinIndex(GremlinLeader.class, 0);
+                        setSkinIndex(BronzeAutomaton.class, 0);
+                        setSkinIndex(BronzeOrb.class, 0);
+                        setSkinIndex(TheCollector.class, 0);
+                        setSkinIndex(TorchHead.class, 0);
+                        setSkinIndex(Champ.class, 0);
+                        setSkinIndex(BanditLeader.class, 0);
+                        setSkinIndex(BanditPointy.class, 0);
+                        setSkinIndex(BanditBear.class, 0);
+                        setSkinIndex(Nemesis.class, 0);
+                        setSkinIndex(Reptomancer.class, 0);
+                        setSkinIndex(SnakeDagger.class, 0);
+                        setSkinIndex(Donu.class, 0);
+                        setSkinIndex(Deca.class, 0);
+                        setSkinIndex(TimeEater.class, 0);
+                        setSkinIndex(AwakenedOne.class, 0);
+                        setSkinIndex(SpireSpear.class, 0);
+                        setSkinIndex(SpireShield.class, 0);
+                        setSkinIndex(CorruptHeart.class, 0);
                     }
                     skinIndexInfo.setBool("enableDefaultSkin", enableDefaultSkin);
                     saveSkinIndexInfo();
@@ -268,5 +329,23 @@ public class GMReskin implements PostInitializeSubscriber,
         String language = getLanguageString();
         String uiStrings = Gdx.files.internal("localization/" + language + "/GMReskin-UIStrings.json").readString(String.valueOf(StandardCharsets.UTF_8));
         BaseMod.loadCustomStrings(UIStrings.class, uiStrings);
+    }
+
+    @Override
+    public void receivePostUpdate() {
+        if (!actionList.isEmpty()) {
+            actionList.get(0).update();
+            if (actionList.get(0).isDone) {
+                actionList.remove(0);
+            }
+        }
+    }
+
+    public static void addToBot(AbstractGameAction action) {
+        actionList.add(action);
+    }
+
+    public static void addToTop(AbstractGameAction action) {
+        actionList.add(0, action);
     }
 }

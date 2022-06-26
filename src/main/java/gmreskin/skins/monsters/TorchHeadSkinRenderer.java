@@ -3,13 +3,9 @@ package gmreskin.skins.monsters;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import gmreskin.skins.SkinRenderer;
 
-public class SnakePlantSkinRenderer extends SkinRenderer {
-    public SnakePlantSkinRenderer(String skinPath) {
+public class TorchHeadSkinRenderer extends SkinRenderer {
+    public TorchHeadSkinRenderer(String skinPath) {
         super(skinPath);
-        if (this.isSkinLoaded()) {
-            this.animation.scale = 2.0F;
-            this.animation.addTriggerEvent("0", animation -> SnakePlantSkinRenderer.this.animation.setCurAnimation("idle"));
-        }
     }
 
     @Override
@@ -19,24 +15,12 @@ public class SnakePlantSkinRenderer extends SkinRenderer {
         this.animation.flipX = this.owner.flipHorizontal;
         this.animation.flipY = this.owner.flipVertical;
         this.animation.alpha = this.owner.tint.color.a * 255.0F;
+        this.animation.scale = 1.1F;
         this.animation.update();
     }
 
     @Override
     public void render(SpriteBatch sb) {
         this.animation.render(sb);
-    }
-
-    @Override
-    public void onDamaged(int damageAmount) {
-        this.animation.setCurAnimation("hit");
-    }
-
-    @Override
-    public void onChangeState(String stateName) {
-        switch (stateName) {
-            case "ATTACK":
-                this.animation.setCurAnimation("attack");
-        }
     }
 }

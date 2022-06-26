@@ -1,21 +1,19 @@
 package gmreskin.skins.monsters;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.megacrit.cardcrawl.core.Settings;
 import gmreskin.skins.SkinRenderer;
 
-public class SnakePlantSkinRenderer extends SkinRenderer {
-    public SnakePlantSkinRenderer(String skinPath) {
+public class SentrySkinRenderer extends SkinRenderer {
+    public SentrySkinRenderer(String skinPath) {
         super(skinPath);
-        if (this.isSkinLoaded()) {
-            this.animation.scale = 2.0F;
-            this.animation.addTriggerEvent("0", animation -> SnakePlantSkinRenderer.this.animation.setCurAnimation("idle"));
-        }
+        if (this.isSkinLoaded()) this.animation.addTriggerEvent("0", a -> animation.setCurAnimation("idle"));
     }
 
     @Override
     public void update() {
         this.animation.xPosition = this.owner.hb.cX + this.owner.animX;
-        this.animation.yPosition = this.owner.hb.y + this.owner.animY;
+        this.animation.yPosition = this.owner.hb.y + this.owner.animY + 175.0F * Settings.scale;
         this.animation.flipX = this.owner.flipHorizontal;
         this.animation.flipY = this.owner.flipVertical;
         this.animation.alpha = this.owner.tint.color.a * 255.0F;
@@ -25,11 +23,6 @@ public class SnakePlantSkinRenderer extends SkinRenderer {
     @Override
     public void render(SpriteBatch sb) {
         this.animation.render(sb);
-    }
-
-    @Override
-    public void onDamaged(int damageAmount) {
-        this.animation.setCurAnimation("hit");
     }
 
     @Override

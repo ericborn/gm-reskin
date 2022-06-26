@@ -1,14 +1,20 @@
 package gmreskin.skins.monsters;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.MathUtils;
+import com.megacrit.cardcrawl.core.CardCrawlGame;
+import com.megacrit.cardcrawl.helpers.ScreenShake;
 import gmreskin.skins.SkinRenderer;
 
-public class SnakePlantSkinRenderer extends SkinRenderer {
-    public SnakePlantSkinRenderer(String skinPath) {
+public class CorruptHeartSkinRenderer extends SkinRenderer {
+    public CorruptHeartSkinRenderer(String skinPath) {
         super(skinPath);
         if (this.isSkinLoaded()) {
-            this.animation.scale = 2.0F;
-            this.animation.addTriggerEvent("0", animation -> SnakePlantSkinRenderer.this.animation.setCurAnimation("idle"));
+            this.animation.scale = 2.3F;
+            this.animation.addTriggerEvent("0", a -> {
+                CardCrawlGame.sound.playAV("HEART_SIMPLE", MathUtils.random(-0.05F, 0.05F), 0.75F);
+                CardCrawlGame.screenShake.shake(ScreenShake.ShakeIntensity.LOW, ScreenShake.ShakeDur.SHORT, false);
+            });
         }
     }
 
@@ -25,18 +31,5 @@ public class SnakePlantSkinRenderer extends SkinRenderer {
     @Override
     public void render(SpriteBatch sb) {
         this.animation.render(sb);
-    }
-
-    @Override
-    public void onDamaged(int damageAmount) {
-        this.animation.setCurAnimation("hit");
-    }
-
-    @Override
-    public void onChangeState(String stateName) {
-        switch (stateName) {
-            case "ATTACK":
-                this.animation.setCurAnimation("attack");
-        }
     }
 }

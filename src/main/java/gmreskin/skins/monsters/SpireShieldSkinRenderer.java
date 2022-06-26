@@ -3,12 +3,12 @@ package gmreskin.skins.monsters;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import gmreskin.skins.SkinRenderer;
 
-public class SnakePlantSkinRenderer extends SkinRenderer {
-    public SnakePlantSkinRenderer(String skinPath) {
+public class SpireShieldSkinRenderer extends SkinRenderer {
+    public SpireShieldSkinRenderer(String skinPath) {
         super(skinPath);
         if (this.isSkinLoaded()) {
-            this.animation.scale = 2.0F;
-            this.animation.addTriggerEvent("0", animation -> SnakePlantSkinRenderer.this.animation.setCurAnimation("idle"));
+            this.animation.addTriggerEvent("0", a -> animation.setCurAnimation("idle"));
+            this.animation.scale = 1.3F;
         }
     }
 
@@ -29,7 +29,9 @@ public class SnakePlantSkinRenderer extends SkinRenderer {
 
     @Override
     public void onDamaged(int damageAmount) {
-        this.animation.setCurAnimation("hit");
+        if (this.animation.getCurAnimationName().equals("idle") || this.animation.getCurAnimationName().equals("hit")) {
+            this.animation.setCurAnimation("hit");
+        }
     }
 
     @Override
@@ -37,6 +39,10 @@ public class SnakePlantSkinRenderer extends SkinRenderer {
         switch (stateName) {
             case "ATTACK":
                 this.animation.setCurAnimation("attack");
+                break;
+            case "OLD_ATTACK":
+                this.animation.setCurAnimation("oldAttack");
+                break;
         }
     }
 }

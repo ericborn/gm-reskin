@@ -2,13 +2,12 @@ package gmreskin.patches;
 
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
 import com.evacipated.cardcrawl.modthespire.lib.SpireRawPatch;
-import com.megacrit.cardcrawl.monsters.beyond.SpireGrowth;
-import com.megacrit.cardcrawl.monsters.beyond.Transient;
-import com.megacrit.cardcrawl.monsters.beyond.WrithingMass;
+import com.megacrit.cardcrawl.monsters.beyond.*;
 import com.megacrit.cardcrawl.monsters.city.*;
-import com.megacrit.cardcrawl.monsters.exordium.FungiBeast;
-import com.megacrit.cardcrawl.monsters.exordium.LouseDefensive;
-import com.megacrit.cardcrawl.monsters.exordium.LouseNormal;
+import com.megacrit.cardcrawl.monsters.ending.CorruptHeart;
+import com.megacrit.cardcrawl.monsters.ending.SpireShield;
+import com.megacrit.cardcrawl.monsters.ending.SpireSpear;
+import com.megacrit.cardcrawl.monsters.exordium.*;
 import gmreskin.GMReskin;
 import gmreskin.annotations.CustomSkinRenderer;
 import gmreskin.annotations.CustomSkinRenders;
@@ -62,6 +61,342 @@ public class MonsterAddAnnotationPatch {
                     }
                 }
             };
+        }
+    }
+
+    @SpirePatch(
+            clz = CorruptHeart.class,
+            method = "takeTurn"
+    )
+    public static class PatchCorruptHeart {
+        @SpireRawPatch
+        public static void Raw(CtBehavior ctMethodToPatch) {
+            CtClass ctClass = ctMethodToPatch.getDeclaringClass();
+            ConstPool constPool = ctMethodToPatch.getMethodInfo().getConstPool();
+            Annotation skin1 = setCustomSkinRenderer(CorruptHeartSkinRenderer.class, GMReskin.getResourcePath("skins/monsters/" + ctClass.getSimpleName() + ".xml"), 0, constPool);
+            addAnnotations(ctMethodToPatch, skin1);
+        }
+    }
+
+    @SpirePatch(
+            clz = SpireShield.class,
+            method = "takeTurn"
+    )
+    public static class PatchSpireShield {
+        @SpireRawPatch
+        public static void Raw(CtBehavior ctMethodToPatch) {
+            CtClass ctClass = ctMethodToPatch.getDeclaringClass();
+            ConstPool constPool = ctMethodToPatch.getMethodInfo().getConstPool();
+            Annotation skin1 = setCustomSkinRenderer(SpireShieldSkinRenderer.class, GMReskin.getResourcePath("skins/monsters/" + ctClass.getSimpleName() + ".xml"), 0, constPool);
+            addAnnotations(ctMethodToPatch, skin1);
+        }
+    }
+
+    @SpirePatch(
+            clz = SpireSpear.class,
+            method = "takeTurn"
+    )
+    public static class PatchSpireSpear {
+        @SpireRawPatch
+        public static void Raw(CtBehavior ctMethodToPatch) {
+            CtClass ctClass = ctMethodToPatch.getDeclaringClass();
+            ConstPool constPool = ctMethodToPatch.getMethodInfo().getConstPool();
+            Annotation skin1 = setCustomSkinRenderer(SpireSpearSkinRenderer.class, GMReskin.getResourcePath("skins/monsters/" + ctClass.getSimpleName() + ".xml"), 0, constPool);
+            addAnnotations(ctMethodToPatch, skin1);
+        }
+    }
+
+    @SpirePatch(
+            clz = AwakenedOne.class,
+            method = "takeTurn"
+    )
+    public static class PatchAwakenedOne {
+        @SpireRawPatch
+        public static void Raw(CtBehavior ctMethodToPatch) {
+            CtClass ctClass = ctMethodToPatch.getDeclaringClass();
+            ConstPool constPool = ctMethodToPatch.getMethodInfo().getConstPool();
+            Annotation skin1 = setCustomSkinRenderer(AwakenedOneSkinRenderer.class, GMReskin.getResourcePath("skins/monsters/" + ctClass.getSimpleName() + ".xml"), 0, constPool);
+            addAnnotations(ctMethodToPatch, skin1);
+        }
+    }
+
+    @SpirePatch(
+            clz = TimeEater.class,
+            method = "takeTurn"
+    )
+    public static class PatchTimeEater {
+        @SpireRawPatch
+        public static void Raw(CtBehavior ctMethodToPatch) {
+            CtClass ctClass = ctMethodToPatch.getDeclaringClass();
+            ConstPool constPool = ctMethodToPatch.getMethodInfo().getConstPool();
+            Annotation skin1 = setCustomSkinRenderer(TimeEaterSkinRenderer.class, GMReskin.getResourcePath("skins/monsters/" + ctClass.getSimpleName() + ".xml"), 0, constPool);
+            addAnnotations(ctMethodToPatch, skin1);
+        }
+    }
+
+    @SpirePatch(
+            clz = Deca.class,
+            method = "takeTurn"
+    )
+    public static class PatchDeca {
+        @SpireRawPatch
+        public static void Raw(CtBehavior ctMethodToPatch) {
+            CtClass ctClass = ctMethodToPatch.getDeclaringClass();
+            ConstPool constPool = ctMethodToPatch.getMethodInfo().getConstPool();
+            Annotation skin1 = setCustomSkinRenderer(DecaSkinRenderer.class, GMReskin.getResourcePath("skins/monsters/" + ctClass.getSimpleName() + ".xml"), 0, constPool);
+            addAnnotations(ctMethodToPatch, skin1);
+        }
+    }
+
+    @SpirePatch(
+            clz = Donu.class,
+            method = "takeTurn"
+    )
+    public static class PatchDonu {
+        @SpireRawPatch
+        public static void Raw(CtBehavior ctMethodToPatch) {
+            CtClass ctClass = ctMethodToPatch.getDeclaringClass();
+            ConstPool constPool = ctMethodToPatch.getMethodInfo().getConstPool();
+            Annotation skin1 = setCustomSkinRenderer(DonuSkinRenderer.class, GMReskin.getResourcePath("skins/monsters/" + ctClass.getSimpleName() + ".xml"), 0, constPool);
+            addAnnotations(ctMethodToPatch, skin1);
+        }
+    }
+
+    @SpirePatch(
+            clz = SnakeDagger.class,
+            method = "takeTurn"
+    )
+    public static class PatchSnakeDagger {
+        @SpireRawPatch
+        public static void Raw(CtBehavior ctMethodToPatch) {
+            CtClass ctClass = ctMethodToPatch.getDeclaringClass();
+            ConstPool constPool = ctMethodToPatch.getMethodInfo().getConstPool();
+            Annotation skin1 = setCustomSkinRenderer(SnakeDaggerSkinRenderer.class, GMReskin.getResourcePath("skins/monsters/" + ctClass.getSimpleName() + ".xml"), 0, constPool);
+            addAnnotations(ctMethodToPatch, skin1);
+        }
+    }
+
+    @SpirePatch(
+            clz = Reptomancer.class,
+            method = "takeTurn"
+    )
+    public static class PatchReptomancer {
+        @SpireRawPatch
+        public static void Raw(CtBehavior ctMethodToPatch) {
+            CtClass ctClass = ctMethodToPatch.getDeclaringClass();
+            ConstPool constPool = ctMethodToPatch.getMethodInfo().getConstPool();
+            Annotation skin1 = setCustomSkinRenderer(ReptomancerSkinRenderer.class, GMReskin.getResourcePath("skins/monsters/" + ctClass.getSimpleName() + ".xml"), 0, constPool);
+            addAnnotations(ctMethodToPatch, skin1);
+        }
+    }
+
+    @SpirePatch(
+            clz = Nemesis.class,
+            method = "takeTurn"
+    )
+    public static class PatchNemesis {
+        @SpireRawPatch
+        public static void Raw(CtBehavior ctMethodToPatch) {
+            CtClass ctClass = ctMethodToPatch.getDeclaringClass();
+            ConstPool constPool = ctMethodToPatch.getMethodInfo().getConstPool();
+            Annotation skin1 = setCustomSkinRenderer(NemesisSkinRenderer.class, GMReskin.getResourcePath("skins/monsters/" + ctClass.getSimpleName() + ".xml"), 0, constPool);
+            addAnnotations(ctMethodToPatch, skin1);
+        }
+    }
+
+    @SpirePatch(
+            clz = BanditBear.class,
+            method = "takeTurn"
+    )
+    public static class PatchBanditBear {
+        @SpireRawPatch
+        public static void Raw(CtBehavior ctMethodToPatch) {
+            CtClass ctClass = ctMethodToPatch.getDeclaringClass();
+            ConstPool constPool = ctMethodToPatch.getMethodInfo().getConstPool();
+            Annotation skin1 = setCustomSkinRenderer(BanditBearSkinRenderer.class, GMReskin.getResourcePath("skins/monsters/" + ctClass.getSimpleName() + ".xml"), 0, constPool);
+            addAnnotations(ctMethodToPatch, skin1);
+        }
+    }
+
+    @SpirePatch(
+            clz = BanditPointy.class,
+            method = "takeTurn"
+    )
+    public static class PatchBanditPointy {
+        @SpireRawPatch
+        public static void Raw(CtBehavior ctMethodToPatch) {
+            CtClass ctClass = ctMethodToPatch.getDeclaringClass();
+            ConstPool constPool = ctMethodToPatch.getMethodInfo().getConstPool();
+            Annotation skin1 = setCustomSkinRenderer(BanditPointySkinRenderer.class, GMReskin.getResourcePath("skins/monsters/" + ctClass.getSimpleName() + ".xml"), 0, constPool);
+            addAnnotations(ctMethodToPatch, skin1);
+        }
+    }
+
+    @SpirePatch(
+            clz = BanditLeader.class,
+            method = "takeTurn"
+    )
+    public static class PatchBanditLeader {
+        @SpireRawPatch
+        public static void Raw(CtBehavior ctMethodToPatch) {
+            CtClass ctClass = ctMethodToPatch.getDeclaringClass();
+            ConstPool constPool = ctMethodToPatch.getMethodInfo().getConstPool();
+            Annotation skin1 = setCustomSkinRenderer(BanditLeaderSkinRenderer.class, GMReskin.getResourcePath("skins/monsters/" + ctClass.getSimpleName() + ".xml"), 0, constPool);
+            addAnnotations(ctMethodToPatch, skin1);
+        }
+    }
+
+    @SpirePatch(
+            clz = Champ.class,
+            method = "takeTurn"
+    )
+    public static class PatchChamp {
+        @SpireRawPatch
+        public static void Raw(CtBehavior ctMethodToPatch) {
+            CtClass ctClass = ctMethodToPatch.getDeclaringClass();
+            ConstPool constPool = ctMethodToPatch.getMethodInfo().getConstPool();
+            Annotation skin1 = setCustomSkinRenderer(ChampSkinRenderer.class, GMReskin.getResourcePath("skins/monsters/" + ctClass.getSimpleName() + ".xml"), 0, constPool);
+            addAnnotations(ctMethodToPatch, skin1);
+        }
+    }
+
+    @SpirePatch(
+            clz = TheCollector.class,
+            method = "takeTurn"
+    )
+    public static class PatchTheCollector {
+        @SpireRawPatch
+        public static void Raw(CtBehavior ctMethodToPatch) {
+            CtClass ctClass = ctMethodToPatch.getDeclaringClass();
+            ConstPool constPool = ctMethodToPatch.getMethodInfo().getConstPool();
+            Annotation skin1 = setCustomSkinRenderer(TheCollectorSkinRenderer.class, GMReskin.getResourcePath("skins/monsters/" + ctClass.getSimpleName() + ".xml"), 0, constPool);
+            addAnnotations(ctMethodToPatch, skin1);
+        }
+    }
+
+    @SpirePatch(
+            clz = TorchHead.class,
+            method = "takeTurn"
+    )
+    public static class PatchTorchHead {
+        @SpireRawPatch
+        public static void Raw(CtBehavior ctMethodToPatch) {
+            CtClass ctClass = ctMethodToPatch.getDeclaringClass();
+            ConstPool constPool = ctMethodToPatch.getMethodInfo().getConstPool();
+            Annotation skin1 = setCustomSkinRenderer(TorchHeadSkinRenderer.class, GMReskin.getResourcePath("skins/monsters/" + ctClass.getSimpleName() + ".xml"), 0, constPool);
+            addAnnotations(ctMethodToPatch, skin1);
+        }
+    }
+
+    @SpirePatch(
+            clz = BronzeAutomaton.class,
+            method = "takeTurn"
+    )
+    public static class PatchBronzeAutomaton {
+        @SpireRawPatch
+        public static void Raw(CtBehavior ctMethodToPatch) {
+            CtClass ctClass = ctMethodToPatch.getDeclaringClass();
+            ConstPool constPool = ctMethodToPatch.getMethodInfo().getConstPool();
+            Annotation skin1 = setCustomSkinRenderer(BronzeAutomatonSkinRenderer.class, GMReskin.getResourcePath("skins/monsters/" + ctClass.getSimpleName() + ".xml"), 0, constPool);
+            addAnnotations(ctMethodToPatch, skin1);
+        }
+    }
+
+    @SpirePatch(
+            clz = GremlinLeader.class,
+            method = "takeTurn"
+    )
+    public static class PatchGremlinLeader {
+        @SpireRawPatch
+        public static void Raw(CtBehavior ctMethodToPatch) {
+            CtClass ctClass = ctMethodToPatch.getDeclaringClass();
+            ConstPool constPool = ctMethodToPatch.getMethodInfo().getConstPool();
+            Annotation skin1 = setCustomSkinRenderer(GremlinLeaderSkinRenderer.class, GMReskin.getResourcePath("skins/monsters/" + ctClass.getSimpleName() + ".xml"), 0, constPool);
+            addAnnotations(ctMethodToPatch, skin1);
+        }
+    }
+
+    @SpirePatch(
+            clz = BookOfStabbing.class,
+            method = "takeTurn"
+    )
+    public static class PatchBookOfStabbing {
+        @SpireRawPatch
+        public static void Raw(CtBehavior ctMethodToPatch) {
+            CtClass ctClass = ctMethodToPatch.getDeclaringClass();
+            ConstPool constPool = ctMethodToPatch.getMethodInfo().getConstPool();
+            Annotation skin1 = setCustomSkinRenderer(BookOfStabbingSkinRenderer.class, GMReskin.getResourcePath("skins/monsters/" + ctClass.getSimpleName() + ".xml"), 0, constPool);
+            addAnnotations(ctMethodToPatch, skin1);
+        }
+    }
+
+    @SpirePatch(
+            clz = Lagavulin.class,
+            method = "takeTurn"
+    )
+    public static class PatchLagavulin {
+        @SpireRawPatch
+        public static void Raw(CtBehavior ctMethodToPatch) {
+            CtClass ctClass = ctMethodToPatch.getDeclaringClass();
+            ConstPool constPool = ctMethodToPatch.getMethodInfo().getConstPool();
+            Annotation skin1 = setCustomSkinRenderer(LagavulinSkinRenderer.class, GMReskin.getResourcePath("skins/monsters/" + ctClass.getSimpleName() + ".xml"), 0, constPool);
+            addAnnotations(ctMethodToPatch, skin1);
+        }
+    }
+
+    @SpirePatch(
+            clz = Sentry.class,
+            method = "takeTurn"
+    )
+    public static class PatchSentry {
+        @SpireRawPatch
+        public static void Raw(CtBehavior ctMethodToPatch) {
+            CtClass ctClass = ctMethodToPatch.getDeclaringClass();
+            ConstPool constPool = ctMethodToPatch.getMethodInfo().getConstPool();
+            Annotation skin1 = setCustomSkinRenderer(SentrySkinRenderer.class, GMReskin.getResourcePath("skins/monsters/" + ctClass.getSimpleName() + ".xml"), 0, constPool);
+            addAnnotations(ctMethodToPatch, skin1);
+        }
+    }
+
+    @SpirePatch(
+            clz = SlimeBoss.class,
+            method = "takeTurn"
+    )
+    public static class PatchSlimeBoss {
+
+    }@SpireRawPatch
+    public static void Raw(CtBehavior ctMethodToPatch) {
+        CtClass ctClass = ctMethodToPatch.getDeclaringClass();
+        ConstPool constPool = ctMethodToPatch.getMethodInfo().getConstPool();
+        Annotation skin1 = setCustomSkinRenderer(SlimeBossSkinRenderer.class, GMReskin.getResourcePath("skins/monsters/" + ctClass.getSimpleName() + ".xml"), 0, constPool);
+        addAnnotations(ctMethodToPatch, skin1);
+    }
+
+    @SpirePatch(
+            clz = TheGuardian.class,
+            method = "takeTurn"
+    )
+    public static class PatchTheGuardian {
+        @SpireRawPatch
+        public static void Raw(CtBehavior ctMethodToPatch) {
+            CtClass ctClass = ctMethodToPatch.getDeclaringClass();
+            ConstPool constPool = ctMethodToPatch.getMethodInfo().getConstPool();
+            Annotation skin1 = setCustomSkinRenderer(TheGuardianRenderer.class, GMReskin.getResourcePath("skins/monsters/" + ctClass.getSimpleName() + ".xml"), 0, constPool);
+            addAnnotations(ctMethodToPatch, skin1);
+        }
+    }
+
+    @SpirePatch(
+            clz = Hexaghost.class,
+            method = "takeTurn"
+    )
+    public static class PatchHexaghost {
+        @SpireRawPatch
+        public static void Raw(CtBehavior ctMethodToPatch) {
+            CtClass ctClass = ctMethodToPatch.getDeclaringClass();
+            ConstPool constPool = ctMethodToPatch.getMethodInfo().getConstPool();
+            Annotation skin1 = setCustomSkinRenderer(HexaghostSkinRenderer.class, GMReskin.getResourcePath("skins/monsters/" + ctClass.getSimpleName() + ".xml"), 0, constPool);
+            addAnnotations(ctMethodToPatch, skin1);
         }
     }
 
