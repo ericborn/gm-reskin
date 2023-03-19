@@ -15,6 +15,9 @@ import gmreskin.annotations.CustomSkinRenders;
 import gmreskin.patches.AbstractMonsterPatch;
 import gmreskin.skins.characters.GeneralCharacterSkinRenderer;
 import gmreskin.skins.monsters.GeneralMonsterSkinRenderer;
+
+import java.io.IOException;
+import java.io.InputStream;
 import java.lang.reflect.InvocationTargetException;
 
 public abstract class SkinRenderer implements Disposable {
@@ -25,12 +28,11 @@ public abstract class SkinRenderer implements Disposable {
     protected AnimatedActor animation;
 
     public SkinRenderer(String skinPath) {
-        try {
-            Gdx.files.internal(skinPath).read();
+        try (InputStream ignored = Gdx.files.internal(skinPath).read()) {
             this.animation = new AnimatedActor(skinPath);
             this.animation.setCurAnimation("idle");
             hasSkin = true;
-        } catch (GdxRuntimeException e) {
+        } catch (GdxRuntimeException | IOException e) {
             hasSkin = false;
         }
     }

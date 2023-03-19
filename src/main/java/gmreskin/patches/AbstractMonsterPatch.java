@@ -45,7 +45,7 @@ public class AbstractMonsterPatch {
             }
     )
     public static class PatchConstructor {
-        public static void Postfix(AbstractMonster m, String name, String id, int maxHealth, float hb_x, float hb_y, float hb_w, float hb_h, String imgUrl, float offsetX, float offsetY, boolean ignoreBlights) {
+        public static void Prefix(AbstractMonster m, String name, String id, int maxHealth, float hb_x, float hb_y, float hb_w, float hb_h, String imgUrl, float offsetX, float offsetY, boolean ignoreBlights) {
             int skinIndex = GMReskin.getSkinIndex(m.getClass());
             AddFieldPatch.skinRenderer.set(m, SkinRenderer.getSkinRenderer(m.getClass(), skinIndex));
             SkinRenderer skinRenderer = AddFieldPatch.skinRenderer.get(m);
