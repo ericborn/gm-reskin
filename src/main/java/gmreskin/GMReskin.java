@@ -11,6 +11,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.utils.Disposable;
 import com.evacipated.cardcrawl.modthespire.Loader;
+import com.evacipated.cardcrawl.modthespire.ModInfo;
 import com.evacipated.cardcrawl.modthespire.lib.SpireConfig;
 import com.evacipated.cardcrawl.modthespire.lib.SpireInitializer;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
@@ -146,6 +147,17 @@ public class GMReskin implements PostInitializeSubscriber,
 
         UIStrings uiStrings = CardCrawlGame.languagePack.getUIString(makeID("ModPanel"));
         ModPanel settingsPanel = new ModPanel();
+
+        skip:
+        for (ModInfo modInfo : Loader.MODINFOS) {
+            for (String modId : modInfo.Dependencies) {
+                if ("gm-reskin".equals(modId)) {
+                    enableDefaultSkin = false;
+                    break skip;
+                }
+            }
+        }
+
         ModLabeledToggleButton enableDefaultSkinOption = new ModLabeledToggleButton(uiStrings.TEXT[0], 350.0F, 700.0F, Color.WHITE, FontHelper.buttonLabelFont, enableDefaultSkin, settingsPanel, (me) -> {},
                 (me) -> {
                     enableDefaultSkin = me.enabled;
