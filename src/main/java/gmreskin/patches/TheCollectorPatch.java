@@ -3,7 +3,9 @@ package gmreskin.patches;
 import basemod.ReflectionHacks;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.esotericsoftware.spine.Skeleton;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
+import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.ImageMaster;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
@@ -14,6 +16,20 @@ import gmreskin.GMReskin;
 import gmreskin.skins.SkinRenderer;
 
 public class TheCollectorPatch {
+    @SpirePatch(
+            clz = TheCollector.class,
+            method = SpirePatch.CONSTRUCTOR
+    )
+    public static class PatchConstructor {
+        public static void Postfix(TheCollector collector) {
+            if (GMReskin.getSkinIndex(TheCollector.class) != -1) {
+                Skeleton skeleton = ReflectionHacks.getPrivate(collector, AbstractCreature.class, "skeleton");
+                skeleton.setX(-99999.0F);
+                skeleton.setY(-99999.0F);
+            }
+        }
+    }
+
     @SpirePatch(
             clz = TheCollector.class,
             method = "takeTurn"
