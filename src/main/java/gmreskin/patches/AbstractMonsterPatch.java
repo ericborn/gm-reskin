@@ -6,6 +6,7 @@ import com.badlogic.gdx.utils.Disposable;
 import com.evacipated.cardcrawl.modthespire.lib.SpireField;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
 import com.evacipated.cardcrawl.modthespire.lib.SpireReturn;
+import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.ChangeStateAction;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.Settings;
@@ -51,8 +52,14 @@ public class AbstractMonsterPatch {
             SkinRenderer skinRenderer = AddFieldPatch.skinRenderer.get(m);
             if (skinRenderer != null && skinRenderer.isSkinLoaded()) {
                 skinRenderer.setOwner(m);
-                List<Disposable> disposables = ReflectionHacks.getPrivate(m, AbstractMonster.class, "disposables");
-                disposables.add(skinRenderer);
+                GMReskin.addToBot(new AbstractGameAction() {
+                    @Override
+                    public void update() {
+                        List<Disposable> disposables = ReflectionHacks.getPrivate(m, AbstractMonster.class, "disposables");
+                        disposables.add(skinRenderer);
+                        isDone = true;
+                    }
+                });
             }
         }
     }
