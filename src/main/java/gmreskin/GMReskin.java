@@ -180,6 +180,13 @@ public class GMReskin implements PostInitializeSubscriber,
                                 e.printStackTrace();
                             }
                         }
+                        if (Loader.isModLoaded("DerFreischutz")) {
+                            try {
+                                disableSkin((Class<? extends AbstractCreature>) Class.forName("demoMod.derfreischutz.characters.DerFreischutzCharacter"));
+                            } catch (ClassNotFoundException e) {
+                                e.printStackTrace();
+                            }
+                        }
                         disableSkin(AcidSlime_L.class);
                         disableSkin(AcidSlime_M.class);
                         disableSkin(AcidSlime_S.class);
@@ -259,6 +266,13 @@ public class GMReskin implements PostInitializeSubscriber,
                         if (Loader.isModLoaded("funnies")) {
                             try {
                                 setSkinIndex((Class<? extends AbstractCreature>) Class.forName("characters.GodOfAbstract"), 0);
+                            } catch (ClassNotFoundException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                        if (Loader.isModLoaded("DerFreischutz")) {
+                            try {
+                                setSkinIndex((Class<? extends AbstractCreature>) Class.forName("demoMod.derfreischutz.characters.DerFreischutzCharacter"), 0);
                             } catch (ClassNotFoundException e) {
                                 e.printStackTrace();
                             }
