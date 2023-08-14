@@ -11,13 +11,6 @@ uniform float settings_scale;
 varying vec4 v_color;
 varying vec2 v_texCoords;
 
-/**
-  * @param vec2 origin - 缩放中心点位置
-  * @param vec2 currPos - 当前点的位置
-  * @param vec2 scale - 缩放比例
-  *
-  * @returns vec2 - 缩放后的位置
-  */
 vec2 getScaledPosition(vec2 origin, vec2 currPos, vec2 scale) {
     vec2 ret = vec2(currPos);
     if (currPos.x <= origin.x) {
@@ -70,8 +63,9 @@ void main() {
         pos.y -= (0.131111 * progress) * settings_scale;
     }
 
-    v_color.a = 0.5;
-    vec4 maskColor = v_color * texture2D(u_texture, v_texCoords);
+    vec4 u_color = vec4(v_color);
+    u_color.a = 0.5;
+    vec4 maskColor = u_color * texture2D(u_texture, v_texCoords);
     vec4 heartColor = texture2D(u_heart, pos);
     heartColor.r = 1.0 - (1.0 - heartColor.r) * heartColor.a;
     heartColor.g = 1.0 - (1.0 - heartColor.g) * heartColor.a;
