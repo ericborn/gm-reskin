@@ -4,8 +4,9 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.GdxRuntimeException;
+import com.evacipated.cardcrawl.modthespire.Loader;
 import com.megacrit.cardcrawl.cards.AbstractCard;
-import com.megacrit.cardcrawl.characters.AbstractPlayer;
+import com.megacrit.cardcrawl.characters.*;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import demoMod.anm2player.AnimatedActor;
@@ -101,10 +102,18 @@ public abstract class SkinRenderer implements Disposable {
             if (AbstractMonster.class.isAssignableFrom(cls)) {
                 return new GeneralMonsterSkinRenderer(GMReskin.getResourcePath("skins/monsters/" + cls.getSimpleName() + ".xml"));
             } else if (AbstractPlayer.class.isAssignableFrom(cls)) {
-                return new GeneralCharacterSkinRenderer(GMReskin.getResourcePath("skins/characters/" + cls.getSimpleName() + ".xml"));
+                if (Loader.isModLoaded("CaffeInSpire") && isOriginalCharacter(cls)) {
+                    return new GeneralCharacterSkinRenderer(GMReskin.getResourcePath("skins/characters/" + cls.getSimpleName() + "Caffe.xml"));
+                } else {
+                    return new GeneralCharacterSkinRenderer(GMReskin.getResourcePath("skins/characters/" + cls.getSimpleName() + ".xml"));
+                }
             }
         }
         return null;
+    }
+
+    private static boolean isOriginalCharacter(Class<?> playerCls) {
+        return Ironclad.class.isAssignableFrom(playerCls) || TheSilent.class.isAssignableFrom(playerCls) || Defect.class.isAssignableFrom(playerCls) || Watcher.class.isAssignableFrom(playerCls);
     }
 
     public static <T extends AbstractCreature> SkinRenderer getSkinRenderer(Class<T> cls) {

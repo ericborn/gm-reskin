@@ -166,27 +166,11 @@ public class GMReskin implements PostInitializeSubscriber,
                         disableSkin(TheSilent.class);
                         disableSkin(Defect.class);
                         disableSkin(Watcher.class);
-                        if (Loader.isModLoaded("Scapegoat")) {
-                            try {
-                                disableSkin((Class<? extends AbstractCreature>) Class.forName("demoMod.scapegoat.characters.ScapegoatCharacter"));
-                            } catch (ClassNotFoundException e) {
-                                e.printStackTrace();
-                            }
-                        }
-                        if (Loader.isModLoaded("funnies")) {
-                            try {
-                                disableSkin((Class<? extends AbstractCreature>) Class.forName("characters.GodOfAbstract"));
-                            } catch (ClassNotFoundException e) {
-                                e.printStackTrace();
-                            }
-                        }
-                        if (Loader.isModLoaded("DerFreischutz")) {
-                            try {
-                                disableSkin((Class<? extends AbstractCreature>) Class.forName("demoMod.derfreischutz.characters.DerFreischutzCharacter"));
-                            } catch (ClassNotFoundException e) {
-                                e.printStackTrace();
-                            }
-                        }
+                        disableCharacterSkinIndexFromOtherMod("Scapegoat", "demoMod.scapegoat.characters.ScapegoatCharacter");
+                        disableCharacterSkinIndexFromOtherMod("funnies", "characters.GodOfAbstract");
+                        disableCharacterSkinIndexFromOtherMod("DerFreischutz", "demoMod.derfreischutz.characters.DerFreischutzCharacter");
+                        disableCharacterSkinIndexFromOtherMod("IceBreaker", "demoMod.icebreaker.characters.IceBreakerCharacter");
+                        disableCharacterSkinIndexFromOtherMod("BlueTheAstray", "rs.wolf.theastray.characters.BlueTheAstray");
                         disableSkin(AcidSlime_L.class);
                         disableSkin(AcidSlime_M.class);
                         disableSkin(AcidSlime_S.class);
@@ -256,27 +240,11 @@ public class GMReskin implements PostInitializeSubscriber,
                         setSkinIndex(TheSilent.class, 0);
                         setSkinIndex(Defect.class, 0);
                         setSkinIndex(Watcher.class, 0);
-                        if (Loader.isModLoaded("Scapegoat")) {
-                            try {
-                                setSkinIndex((Class<? extends AbstractCreature>) Class.forName("demoMod.scapegoat.characters.ScapegoatCharacter"), 0);
-                            } catch (ClassNotFoundException e) {
-                                e.printStackTrace();
-                            }
-                        }
-                        if (Loader.isModLoaded("funnies")) {
-                            try {
-                                setSkinIndex((Class<? extends AbstractCreature>) Class.forName("characters.GodOfAbstract"), 0);
-                            } catch (ClassNotFoundException e) {
-                                e.printStackTrace();
-                            }
-                        }
-                        if (Loader.isModLoaded("DerFreischutz")) {
-                            try {
-                                setSkinIndex((Class<? extends AbstractCreature>) Class.forName("demoMod.derfreischutz.characters.DerFreischutzCharacter"), 0);
-                            } catch (ClassNotFoundException e) {
-                                e.printStackTrace();
-                            }
-                        }
+                        setCharacterSkinIndexFromOtherMod("Scapegoat", "demoMod.scapegoat.characters.ScapegoatCharacter", 0);
+                        setCharacterSkinIndexFromOtherMod("funnies", "characters.GodOfAbstract", 0);
+                        setCharacterSkinIndexFromOtherMod("DerFreischutz", "demoMod.derfreischutz.characters.DerFreischutzCharacter", 0);
+                        setCharacterSkinIndexFromOtherMod("IceBreaker", "demoMod.icebreaker.characters.IceBreakerCharacter", 0);
+                        setCharacterSkinIndexFromOtherMod("BlueTheAstray", "rs.wolf.theastray.characters.BlueTheAstray", 0);
                         setSkinIndex(AcidSlime_L.class, 0);
                         setSkinIndex(AcidSlime_M.class, 0);
                         setSkinIndex(AcidSlime_S.class, 0);
@@ -348,6 +316,26 @@ public class GMReskin implements PostInitializeSubscriber,
         );
         settingsPanel.addUIElement(enableDefaultSkinOption);
         BaseMod.registerModBadge(ImageMaster.loadImage(getResourcePath("ui/badge.png")), "GM Reskin", "Everyone", "TODO", settingsPanel);
+    }
+
+    private static void disableCharacterSkinIndexFromOtherMod(String modId, String charClassPath) {
+        if (Loader.isModLoaded(modId)) {
+            try {
+                disableSkin((Class<? extends AbstractCreature>) Class.forName(charClassPath));
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private static void setCharacterSkinIndexFromOtherMod(String modId, String charClassPath, int index) {
+        if (Loader.isModLoaded(modId)) {
+            try {
+                setSkinIndex((Class<? extends AbstractCreature>) Class.forName(charClassPath), index);
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     @Override
