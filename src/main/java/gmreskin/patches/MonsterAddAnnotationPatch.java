@@ -65,6 +65,31 @@ public class MonsterAddAnnotationPatch {
     }
 
     @SpirePatch(
+            cls = "demoMod.derfreischutz.characters.DerFreischutzCharacter",
+            method = "render",
+            optional = true
+    )
+    public static class PatchDerFreischutz {
+        @SpireRawPatch
+        public static void Raw(CtBehavior ctMethodToPatch) {
+            CtClass ctClass = ctMethodToPatch.getDeclaringClass();
+            ConstPool constPool = ctMethodToPatch.getMethodInfo().getConstPool();
+            Annotation skin1 = setCustomSkinRenderer(GeneralCharacterSkinRenderer.class, GMReskin.getResourcePath("skins/characters/" + ctClass.getSimpleName() + ".xml"), 0, constPool);
+            addAnnotations(ctMethodToPatch, skin1);
+        }
+
+        public static ExprEditor Instrument() {
+            return new ExprEditor() {
+                public void edit(MethodCall m) throws CannotCompileException {
+                    if (m.getClassName().equals("com.megacrit.cardcrawl.stances.AbstractStance") && m.getMethodName().equals("render")) {
+                        m.replace("super.render(sb);if (true) return;");
+                    }
+                }
+            };
+        }
+    }
+
+    @SpirePatch(
             clz = CorruptHeart.class,
             method = "takeTurn"
     )
